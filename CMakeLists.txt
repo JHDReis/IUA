@@ -1,7 +1,8 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.16.0)
-project(IUA)
+cmake_minimum_required(VERSION 3.23)
 
+project(algorithms)
 
-#find_package(Catch2 CONFIG REQUIRED)
-
-#target_link_libraries(main PRIVATE Catch2::Catch2)
+add_subdirectory(3rdparty)
+add_subdirectory(lib)
+add_subdirectory(app)
+add_subdirectory(tests)
