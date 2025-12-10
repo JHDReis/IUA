@@ -110,4 +110,4 @@ template <typename FIRST, typename SECOND> struct PairFirstTransform
 template <typename FIRST, typename SECOND, typename COMPARATOR = DefaultComparator<FIRST>>
 using PairFirstComparator = TransformComparator<std::pair<FIRST, SECOND>, PairFirstTransform<FIRST, SECOND>, COMPARATOR>;
 
-
+inline double PI() { return 3.14159265358979323846433832795; }
