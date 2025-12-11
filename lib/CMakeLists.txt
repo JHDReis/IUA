@@ -1,3 +1,1 @@
-project(AlgorithmsLib)
-
-add_subdirectory(Utilities)
+add_subdirectory(algorithms)

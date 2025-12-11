@@ -117,6 +117,22 @@ public:
         return result *= scalar;
     }
 
+    Vector operator-() const { return Vector(*this) *= -1; }
 
+    bool operator==(const Vector& rhs) const
+    {
+        if (size != rhs.size) return false;
+
+        for (int i = 0; i < size; ++i) {
+            if (array[i] != rhs.array[i]) return false;
+        }
+        return true;
+    }
+
+    friend bool operator==(const Vector& lhs, const Vector& rhs)
+    {
+        return lhs.size == rhs.size
+               && std::equal(lhs.array, lhs.array + lhs.size, rhs.array);
+    }
 
 };
