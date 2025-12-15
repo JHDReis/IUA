@@ -3,17 +3,37 @@
 // matching elements to the end of the array
 
 #include <Vector.h>
+#include <iostream>
+#include "StopWatch.h"
+#include <random>
+#include <ranges>
+
+
+auto dice()
+{
+    static std::uniform_int_distribution<int> distr{1, 10};
+    static std::random_device device;
+    static std::mt19937 engine {device()};
+    return distr(engine);
+}
+
 
 int main()
 {
+    StopWatch t1("fill");
+    Vector<int> v(1000000);
+    t1.~StopWatch();
 
-    Vector<int> v;
-    v.append(1);
-    v.append(2);
-    v.append(3);
-    v.append(4);
-    v.append(5);
+    {
+        StopWatch test("random fill");
+        std::ranges::generate(v[0], v[v.getSize() - 1], dice);
+    }
 
+    {
+        auto filter = [](int item) { return item % 2 == 0; };
+        StopWatch test("remove_if");
+        v.remove_if(filter);
+    }
 
     return 0;
 }
