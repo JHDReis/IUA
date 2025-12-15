@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Utility.h"
 #include "ArithmeticType.h"
-
+#include "Utility.h"
 #include <algorithm>
 #include <cassert>
-
+#include <iostream>
+#include <ranges>
 
 template<typename ITEM> class Vector : public ArithmeticType<Vector<ITEM>> {
 
@@ -17,11 +17,11 @@ public:
     explicit Vector(): array(rawMemory<ITEM>(capacity)) {}
 
     explicit Vector(int initialCapacity, const ITEM& value = ITEM()):
-        capacity(std::ranges::max(initialCapacity, MIN_CAPACITY)),
+        capacity(std::ranges::max(initialCapacity, static_cast<int>(MIN_CAPACITY))),
         array(rawMemory<ITEM>(capacity))
     {
         for (int i = 0; i < capacity; ++i)
-            append(value[i]);
+            append(value);
     }
 
     Vector(const Vector& other)
@@ -133,6 +133,21 @@ public:
     {
         return lhs.size == rhs.size
                && std::equal(lhs.array, lhs.array + lhs.size, rhs.array);
+    }
+
+    void print()
+    {
+        for (int i = 0; i < size; ++i) { std::cout << array[i] << " "; }
+        std::cout << "\n";
+    }
+
+    void remove_if(std::function<bool(ITEM)> filter)
+    {
+        Vector temp;
+        for (int i = 0; i < size; i++) {
+            if (!filter(array[i])) temp.append(array[i]);
+        }
+        swap(temp);
     }
 
 };
