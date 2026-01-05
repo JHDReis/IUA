@@ -2,14 +2,15 @@
 #ifndef IUA_STOPWATCH_H
 #define IUA_STOPWATCH_H
 #include <memory>
-#include <string>
+#include <source_location>
 
-class StopWatch {
+class StopWatch
+{
     class Impl;
     std::unique_ptr<Impl> _impl;
 
 public:
-    explicit StopWatch(const std::string& message);
+    explicit StopWatch(const std::string_view message, const std::source_location& location = std::source_location::current());
 
     ~StopWatch();
 
